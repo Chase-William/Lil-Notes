@@ -1,0 +1,1 @@
+C:\Dev\Lil Notes\Lil Notes\Lil Notes.UWP\Lil Notes.UWP.csproj;x86
