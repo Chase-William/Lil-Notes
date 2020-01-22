@@ -35,33 +35,45 @@ namespace Lil_Notes.Cells
         public NoteCell()
 		{
 			// Creating our views and layouts.
-			var icon = new Image() { Margin = 2 };
-			var nameLabel = new Label() { FontSize = 20 };
+			var icon			  = new Image() { Margin = 2 };
+			var nameLabel		  = new Label() { FontSize = 20 };
 			var creationDateLabel = new Label();
 			var lastModifiedLabel = new Label();
-			var verticaLayout = new StackLayout() { HorizontalOptions = LayoutOptions.EndAndExpand };
-			var horizontalLayout = new StackLayout() { Orientation = StackOrientation.Horizontal };
-
+			var verticaLayout     = new StackLayout() { HorizontalOptions = LayoutOptions.EndAndExpand };
+			var horizontalLayout  = new StackLayout() { Orientation = StackOrientation.Horizontal };
+		
 			// Setting bindings for listview.
-			nameLabel.SetBinding		(Label.TextProperty,   new Binding(NAME_TEXT_BINDING_ID));
+			nameLabel        .SetBinding(Label.TextProperty,   new Binding(NAME_TEXT_BINDING_ID));
 			creationDateLabel.SetBinding(Label.TextProperty,   new Binding(CREATION_DATE_TEXT_BINDING_ID));
 			lastModifiedLabel.SetBinding(Label.TextProperty,   new Binding(LAST_MODIFIED_TEXT_BINDING_ID));
-			icon.SetBinding				(Image.SourceProperty, new Binding(ICON_BINDING_ID));
+			icon             .SetBinding(Image.SourceProperty, new Binding(ICON_BINDING_ID));
+			
 
 			horizontalLayout.Children.Add(icon);
 			horizontalLayout.Children.Add(nameLabel);
-			verticaLayout.Children.Add(creationDateLabel);
-			verticaLayout.Children.Add(lastModifiedLabel);
-			horizontalLayout.Children.Add(verticaLayout);
+			verticaLayout   .Children.Add(creationDateLabel);
+			verticaLayout   .Children.Add(lastModifiedLabel);
+			horizontalLayout.Children.Add(verticaLayout);		
 
+			// Frame allows us to have a border
+			var frame = new Frame()
+			{
+				Content = horizontalLayout,
+				BorderColor = Color.FromHex("1E90EE"),
+				HasShadow = true,
+				HeightRequest = 70,
+				Padding = 5,
+				Margin = new Thickness(0,5,0,5)
+			};
+			
 			// Creating a binding for the cell.
 			// The property we will be targeting is the BackgroundColor
 			// The instance of the binding is called BackgroundColor, this will be used by the binding engine
-			horizontalLayout.SetBinding(VisualElement.BackgroundColorProperty, new Binding(BACKGROUND_COLOR_BINDING_ID));
+			frame.SetBinding(VisualElement.BackgroundColorProperty, new Binding(BACKGROUND_COLOR_BINDING_ID));
 
-			// Adding the super layout to the parent view.
+			// Adding the frame to the parent view.
 			// This will display this entire view structure as a single view
-			View = horizontalLayout;
+			View = frame;
 		}		
 	}
 }

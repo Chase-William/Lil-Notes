@@ -38,8 +38,6 @@ namespace Lil_Notes
             InitializeComponent();
             // Expressing to the ListView on what kind of cell type it will be using
             NotesListView.ItemTemplate = new DataTemplate(typeof(NoteCell));
-            // Setting the background property to white
-            NotesListView.BackgroundColor = Color.White;
             // Attaching the source
             NotesListView.ItemsSource = Notes;
         }
@@ -67,15 +65,14 @@ namespace Lil_Notes
             NotesListView.IsEnabled = false;
 
             // Select new
-            selectedNote = (Note)NotesListView.SelectedItem;
-            selectedNote.SetColors(true);
-
+            selectedNote = (Note)e.SelectedItem;
+            selectedNote.SetColors(true);            
 
             // Creating the next page and passing in the data.
             Navigation.PushModalAsync(new NavigationPage(new EditNotePage(selectedNote)
             {
                 BindingContext = selectedNote
-            }));
+            }));                               
         }
 
         /// <summary>

@@ -24,20 +24,8 @@
     <StackLayout>
         
         <!-- List of notes -->
-        <ListView x:Name="NotesListView" ItemsSource="{Binding Notes}" Margin="5" ItemSelected="OnListViewItemSelected"/>
-        <!--<ListView.ItemTemplate>
-                <DataTemplate>
-                    <custom:NoteCell BackgroundColor="Aqua"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>-->
-        <!--<ListView.ItemTemplate>
-                <DataTemplate>
-                    <ImageCell Text="{Binding Name}" Detail="{Binding CreationDate, StringFormat='Date Created: {0}'}" ImageSource="note_icon.png"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>-->
-        
+        <ListView x:Name="NotesListView" ItemsSource="{Binding Notes}" Margin="5" ItemSelected="OnListViewItemSelected" HasUnevenRows="True"/>
+
     </StackLayout>
 
 </ContentPage>
