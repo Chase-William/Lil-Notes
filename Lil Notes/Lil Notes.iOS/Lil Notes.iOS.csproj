@@ -135,4 +135,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\note_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\note_icon_2x.png" />
+  </ItemGroup>
 </Project>

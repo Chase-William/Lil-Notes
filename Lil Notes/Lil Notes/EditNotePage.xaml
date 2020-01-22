@@ -6,11 +6,28 @@
              mc:Ignorable="d"
              x:Class="Lil_Notes.EditNotePage">
 
-    <ContentPage.Content>
-        <StackLayout>
+    <!-- Toolbar for app -->
+    <ContentPage.ToolbarItems>
 
-            <Label Text="{Binding Name}"/>
-            <Label Text="{Binding Content}"/>
+        <!-- Item on bar for creating new notes -->
+        <ToolbarItem 
+                     Icon="finished_icon.png"  
+                     Priority="0"  
+                     Order="Primary"
+                     Clicked="OnFinishedBtnClicked"/>
+
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+
+            <Image Source="note_icon_2x.png" Margin="10"/>
+            
+            <Label Text="Name:"/>
+            <Entry x:Name="NameEntry" Text="{Binding Name}"/>
+
+            <Label Text="Notes:"/>
+            <Entry x:Name="ContentEntry" Text="{Binding Content}"/>
 
         </StackLayout>
     </ContentPage.Content>

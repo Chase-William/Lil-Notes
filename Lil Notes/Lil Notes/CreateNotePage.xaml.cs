@@ -39,7 +39,8 @@ namespace Lil_Notes
             else
             {
                 // https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/pop-ups
-                await DisplayAlert("Error", "The note's name cannot be empty or just spaces.", "OK");
+                // Inform user of error
+                await DisplayAlert(NameErrorAlert.TITLE, NameErrorAlert.MSG, NameErrorAlert.CANCEL);
             }
         }
     }

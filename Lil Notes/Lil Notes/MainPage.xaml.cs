@@ -28,7 +28,7 @@ namespace Lil_Notes
         }
 
         // Tracks note selected
-        private Note selected;
+        private Note selectedNote;
 
         /// <summary>
         ///     Constructor for the main page.
@@ -50,10 +50,11 @@ namespace Lil_Notes
         /// </summary>
         private void OnCreateNoteClicked(object sender, EventArgs e)
         {
-            Navigation.PushModalAsync(new NavigationPage(new CreateNotePage
-            {
-                BindingContext = new Note("Note1", "")
-            }));
+            // Disables the user from clicking several cells before the new page covers it the listview
+            NotesListView.IsEnabled = false;
+
+            // Must wrap CreateNotePage in NavigationPage so our toolbar will be visible
+            Navigation.PushModalAsync(new NavigationPage(new CreateNotePage()));
         }
         
         /// <summary>
@@ -66,14 +67,14 @@ namespace Lil_Notes
             NotesListView.IsEnabled = false;
 
             // Select new
-            selected = (Note)NotesListView.SelectedItem;
-            selected.SetColors(true);
+            selectedNote = (Note)NotesListView.SelectedItem;
+            selectedNote.SetColors(true);
 
 
             // Creating the next page and passing in the data.
-            Navigation.PushModalAsync(new NavigationPage(new EditNotePage
+            Navigation.PushModalAsync(new NavigationPage(new EditNotePage(selectedNote)
             {
-                BindingContext = selected
+                BindingContext = selectedNote
             }));
         }
 
@@ -82,13 +83,20 @@ namespace Lil_Notes
         /// </summary>
         protected override void OnAppearing()
         {            
-            if (selected != null)
+            // If a note was selected before leaving this page; make sure to set its color back
+            // Furthermore reset the note variable to null so if we leave the page without selecting a note it wont reset it to a color it already is.
+            if (selectedNote != null)
             {
-                selected.SetColors(false);
-                NotesListView.IsEnabled = !NotesListView.IsEnabled;               
+                selectedNote.SetColors(false);
+                selectedNote = null;
             }
+
+            // Whenever we return the list should be active
+            // This runs 1 time on launch when it's already true but not a huge deal
+            NotesListView.IsEnabled = true;
 
             base.OnAppearing();
         }
+
     }
 }

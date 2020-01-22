@@ -19,9 +19,13 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout>
-            <Entry x:Name="NameEntry" Text="{Binding Name}"/>
-            <Entry x:Name="ContentEntry" Text="{Binding Content}"/>
+        <StackLayout Padding="10">
+
+            <Image Source="note_icon_2x.png" Margin="10"/>
+
+            <Entry x:Name="NameEntry" Text="{Binding Name}" Placeholder="Note's Name"/>
+            <Entry x:Name="ContentEntry" Text="{Binding Content}" Placeholder="Notes"/>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
