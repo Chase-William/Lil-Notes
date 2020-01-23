@@ -473,3 +473,5 @@ C:\Dev\Lil Notes\Lil Notes\Lil Notes.Android\obj\Debug\90\stamp\_ResolveLibraryP
 C:\Dev\Lil Notes\Lil Notes\Lil Notes.Android\obj\Debug\90\res\drawable\note_icon.png
 C:\Dev\Lil Notes\Lil Notes\Lil Notes.Android\obj\Debug\90\res\drawable\finished_icon.png
 C:\Dev\Lil Notes\Lil Notes\Lil Notes.Android\obj\Debug\90\res\drawable\note_icon_2x.png
+C:\Dev\Lil Notes\Lil Notes\Lil Notes.Android\obj\Debug\90\res\drawable\settings_icon.png
+C:\Dev\Lil Notes\Lil Notes\Lil Notes.Android\obj\Debug\90\res\drawable\add_icon.png

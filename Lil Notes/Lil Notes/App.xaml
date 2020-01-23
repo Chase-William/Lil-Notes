@@ -12,20 +12,15 @@
             <!-- Custom color codes -->
             <Color x:Key="GreenColor">#32EE9C</Color>
             <Color x:Key="BlueColor">#1E90EE</Color>
-            
-            <!-- Navigation bar styles -->
+            <Color x:Key="GrayColor">#2E3133</Color>
+
+                <!-- Navigation bar styles -->
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="#1E90EE"/>
                 <Setter Property="BarTextColor" Value="White"/>
             </Style>
 
-            <Style TargetType="ListView">
-                <Setter Property="SeparatorColor" Value="Transparent"/>
-                <Setter Property="BackgroundColor" Value="White"/>
-                <Setter Property="SelectionMode" Value="Single"/>
-            </Style>
-            
         </ResourceDictionary>
     </Application.Resources>
-    
+
 </Application>
