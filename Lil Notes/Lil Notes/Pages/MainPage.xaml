@@ -3,7 +3,7 @@
              xmlns:x      ="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d      ="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc     ="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:custom ="clr-namespace:Lil_Notes.Cells"
+             xmlns:local  ="clr-namespace:Lil_Notes.CustomViews"
              mc:Ignorable ="d"
              x:Class      ="Lil_Notes.MainPage"
              Title        ="Lil Notes">
@@ -32,8 +32,11 @@
             </Style>
             
             <!-- Styles for searchbar -->
-            <Style x:Key="LightSearchBarStyle" TargetType="SearchBar">
-                <Setter Property=""
+            <Style x:Key="LightCustomSearchBarStyle" TargetType="local:CustomSearchBar">
+                <Setter Property="BackgroundColor" Value="Yellow"/>
+            </Style>
+            <Style x:Key="DarkCustomSearchBarStyle" TargetType="local:CustomSearchBar">
+                <Setter Property="BackgroundColor" Value="Red"/>
             </Style>
             
         </ResourceDictionary>
@@ -59,12 +62,13 @@
     
     <StackLayout Style="{DynamicResource StackLayoutStyle}">
 
-        <SearchBar Placeholder         ="Search"
-                   CancelButtonColor   ="{StaticResource BlueColor}"
-                   PlaceholderColor    ="{StaticResource GrayColor}"
-                   TextColor           ="{StaticResource BlueColor}"
-                   SearchButtonPressed ="OnSearchBarBtnPressed"             
-                   FontAttributes      ="Italic" />
+        <local:CustomSearchBar Placeholder         ="Search"
+                               CancelButtonColor   ="{StaticResource BlueColor}"
+                               PlaceholderColor    ="{StaticResource GrayColor}"
+                               TextColor           ="{StaticResource BlueColor}"
+                               SearchButtonPressed ="OnSearchBarBtnPressed"                                 
+                               FontAttributes      ="Italic" 
+                               Style="{DynamicResource CustomSearchBarStyle}"/>
 
         <!-- List of notes -->
         <ListView x:Name        ="NotesListView" 

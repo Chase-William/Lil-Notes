@@ -484,3 +484,4 @@ C:\Dev\Lil Notes\Lil Notes\Lil Notes.Android\obj\Debug\90\res\drawable\yellow_no
 C:\Dev\Lil Notes\Lil Notes\Lil Notes.Android\obj\Debug\90\res\drawable\yellow_note_icon2x.png
 C:\Dev\Lil Notes\Lil Notes\Lil Notes.Android\obj\Debug\90\res\drawable\purple_note_icon2x.png
 C:\Dev\Lil Notes\Lil Notes\Lil Notes.Android\obj\Debug\90\res\drawable\app_icon.png
+C:\Dev\Lil Notes\Lil Notes\Lil Notes.Android\obj\Debug\90\android\src\crc640ce5782c3e8a8e65\CustomSearchBarRenderer.java

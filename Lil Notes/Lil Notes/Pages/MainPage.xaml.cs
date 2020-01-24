@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Lil_Notes.Cells;
+using Lil_Notes.CustomViews;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Collections.Generic;
@@ -123,12 +123,14 @@ namespace Lil_Notes
         {
             Resources["NotesListViewStyle"] = Resources["DarkNotesListViewStyle"];
             Resources["StackLayoutStyle"] = Resources["DarkStackLayoutStyle"];
+            Resources["CustomSearchBarStyle"] = Resources["DarkCustomSearchBarStyle"];
         }
 
         public void SetRenderLightTheme()
         {
             Resources["NotesListViewStyle"] = Resources["LightNotesListViewStyle"];
             Resources["StackLayoutStyle"] = Resources["LightStackLayoutStyle"];
+            Resources["CustomSearchBarStyle"] = Resources["LightCustomSearchBarStyle"];
         }        
     }
 }

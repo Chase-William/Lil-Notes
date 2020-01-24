@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Lil_Notes.Cells;
+using Lil_Notes.CustomViews;
 
 namespace Lil_Notes
 {
