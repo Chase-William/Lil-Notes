@@ -10,12 +10,17 @@ namespace Lil_Notes
 	/// </summary>
     public class Note : INotifyPropertyChanged
     {
-        #region Fields & Properties 
+		#region Fields & Properties 
+
+		private readonly string[] Icons = new string[] { "blue", "green", "yellow", "red", "purple" };
+		private const string NOTE_FILE_EXTENSION = "_note_icon";
 
         private string name;
-		private string content;
-		private DateTime creationDate;
-		private DateTime lastModifiedDate;
+		private string iconPath;
+		public string Content { get; set; }
+		public DateTime CreationDate { get; set; }
+		public DateTime LastModifiedDate { get; set; }
+	
 
 		// Event for binding engine updates
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -30,44 +35,54 @@ namespace Lil_Notes
 			{				
 				name = value;
 				// Will trigger binding engine with this event
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(NoteCell.NAME_TEXT_BINDING_ID));
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(NoteCell.BIND_NOTE_NAME));
 			}
 		}
-
-		public string Content { get => content; set => content = value; }
-		public DateTime CreationDate { get => creationDate; set => creationDate = value; }		
-		public DateTime LastModifiedDate { get => lastModifiedDate; set => lastModifiedDate = value; }
-
+		
 		/// <summary>
 		///		Property for setting the background which invokes PropertyChanged event for the binding engine.
 		/// </summary>
 		public Color BackgroundColor
 		{
-			get { return backgroundColor; }
+			get => backgroundColor;
 			set
 			{
 				// Assign value
 				backgroundColor = value;
 				// Invoke the propertychanged event so the binding engine can make the appropriate changes to the pasted property
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(NoteCell.BACKGROUND_COLOR_BINDING_ID));
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(NoteCell.BIND_BACKGROUND_COLOR));
+			}
+		}
+
+		public string IconPath
+		{
+			get => iconPath;
+			set
+			{
+				iconPath = value;				
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(NoteCell.BIND_ICON_PATH));
 			}
 		}
 
 		/// <summary>
 		///		Readonly property for getting the note icon's filename.
 		/// </summary>
-		public string ICON { get => "note_icon.png"; }
+		// public string ICON { get => "note_icon.png"; }
 
-        #endregion
+		#endregion
 
 		/// <summary>
 		///		Constructor which takes the note's name and its contents (text).
 		/// </summary>
-        public Note(string _name, string _content)
+		public Note(string _name, string _content)
 		{
 			Name = _name;
 			Content = _content;
 			CreationDate = DateTime.Now;
+
+			// Choosing random icon
+			var rnd = new Random();
+			IconPath = Icons[rnd.Next(0, Icons.Length)] + NOTE_FILE_EXTENSION;
 		}		
 
 		/// <summary>

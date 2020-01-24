@@ -15,9 +15,12 @@ namespace Lil_Notes
 	[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateNotePage : ContentPage
     {
-        public CreateNotePage()
+        private Note note;
+
+        public CreateNotePage(Note _blankNote)
         {
             InitializeComponent();
+            note = _blankNote;
         }       
 
         /// <summary>
@@ -29,11 +32,14 @@ namespace Lil_Notes
             // If the name entry isn't null or just spaces:
             if (!string.IsNullOrWhiteSpace(NameEntry.Text))
             {
+                note.Name = NameEntry.Text;
+                note.Content = ContentEntry.Text;
+
                 // Creating the new note instance and adding it to our list of notes
-                DataNotes.Notes.Add(new Note(NameEntry.Text, ContentEntry.Text));
+                DataNotes.Notes.Add(note);
 
                 // Removing this page from the stack navigation
-                await Navigation.PopModalAsync();
+                await Navigation.PopAsync();
             }
             // Informs user that they done goofed:
             else

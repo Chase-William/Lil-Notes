@@ -658,8 +658,14 @@
       <PackagePath>Assets\Wide310x150Logo.scale-400.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Dev\Lil Notes\Lil Notes\Lil Notes.UWP\finished_icon.png">
+      <PackagePath>finished_icon.png</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Dev\Lil Notes\Lil Notes\Lil Notes.UWP\note_icon.png">
       <PackagePath>note_icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Dev\Lil Notes\Lil Notes\Lil Notes.UWP\note_icon_2x.png">
+      <PackagePath>note_icon_2x.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Dev\Lil Notes\Lil Notes\Lil Notes.UWP\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>

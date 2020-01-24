@@ -10,26 +10,30 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <!-- Light styling for listview -->
+            
+            <!-- Styles for listview -->
             <Style x:Key="LightNotesListViewStyle" TargetType="ListView">
                 <Setter Property="SeparatorColor" Value="Transparent"/>
                 <Setter Property="BackgroundColor" Value="White"/>
                 <Setter Property="SelectionMode" Value="Single"/>
             </Style>
-
-            <!-- Dark styling for listview -->
             <Style x:Key="DarkNotesListViewStyle" TargetType="ListView">
                 <Setter Property="SeparatorColor" Value="DarkRed"/>
-                <Setter Property="BackgroundColor" Value="Yellow"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource GrayColor}"/>
                 <Setter Property="SelectionMode" Value="Single"/>
             </Style>
 
+            <!-- Styles for stacklayout -->
             <Style x:Key="LightStackLayoutStyle" TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="White"/>
             </Style>
-
             <Style x:Key="DarkStackLayoutStyle" TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="{StaticResource GrayColor}"/>
+            </Style>
+            
+            <!-- Styles for searchbar -->
+            <Style x:Key="LightSearchBarStyle" TargetType="SearchBar">
+                <Setter Property=""
             </Style>
             
         </ResourceDictionary>
@@ -39,24 +43,29 @@
     <ContentPage.ToolbarItems>
         
         <!-- Item on bar for creating new notes -->
-        <ToolbarItem Text     ="Add`"  
+        <ToolbarItem Text     ="Add"  
                      Icon     ="add_icon.png"  
                      Priority ="0"  
                      Order    ="Primary"
                      Clicked  ="OnCreateNoteClicked"/>
 
-        ------------------------------------------------------------------------- BIND MORE VIEWS FOR RENDERING DISPLAY MODES
-        
-        <ToolbarItem Text="Settings"
+        <ToolbarItem Text            ="Settings"
                      IconImageSource ="settings_icon.png"
-                     Priority="1"
-                     Order="Primary"
-                     Clicked="OnSettingsBtnClicked"/>
+                     Priority        ="1"
+                     Order           ="Primary"
+                     Clicked         ="OnSettingsBtnClicked"/>
 
     </ContentPage.ToolbarItems>
     
     <StackLayout Style="{DynamicResource StackLayoutStyle}">
-        
+
+        <SearchBar Placeholder         ="Search"
+                   CancelButtonColor   ="{StaticResource BlueColor}"
+                   PlaceholderColor    ="{StaticResource GrayColor}"
+                   TextColor           ="{StaticResource BlueColor}"
+                   SearchButtonPressed ="OnSearchBarBtnPressed"             
+                   FontAttributes      ="Italic" />
+
         <!-- List of notes -->
         <ListView x:Name        ="NotesListView" 
                   ItemsSource   ="{Binding Notes}" 

@@ -20,8 +20,9 @@
     <ContentPage.Content>
         <StackLayout Padding="10">
 
-            <Image Source ="note_icon_2x.png" 
-                   Margin ="10"/>
+            <Image Source="{Binding IconPath, StringFormat='{0}2x'}" 
+                   Margin="10"
+                   WidthRequest="140"/>
 
             <Entry x:Name      ="NameEntry" 
                    Text        ="{Binding Name}" 

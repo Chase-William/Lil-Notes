@@ -3,6 +3,9 @@ C:\Dev\Lil Notes\Lil Notes\Lil Notes\bin\Debug\netstandard2.0\Lil Notes.dll
 C:\Dev\Lil Notes\Lil Notes\Lil Notes\bin\Debug\netstandard2.0\ref\Lil Notes.dll
 C:\Dev\Lil Notes\Lil Notes\Lil Notes\bin\Debug\netstandard2.0\Lil Notes.pdb
 C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\Pages\CreateNotePage.xaml.g.cs
+C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\Pages\EditNotePage.xaml.g.cs
+C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\Pages\MainPage.xaml.g.cs
 C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\Lil Notes.AssemblyInfoInputs.cache
 C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\Lil Notes.AssemblyInfo.cs
 C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\XamlC.stamp
@@ -10,6 +13,3 @@ C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\Lil Notes.dll
 C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\ref\Lil Notes.dll
 C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\Lil Notes.pdb
 C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\Lil Notes.csprojAssemblyReference.cache
-C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\Pages\CreateNotePage.xaml.g.cs
-C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\Pages\EditNotePage.xaml.g.cs
-C:\Dev\Lil Notes\Lil Notes\Lil Notes\obj\Debug\netstandard2.0\Pages\MainPage.xaml.g.cs

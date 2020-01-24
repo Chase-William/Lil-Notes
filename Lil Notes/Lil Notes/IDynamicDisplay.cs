@@ -7,15 +7,15 @@ namespace Lil_Notes
     /// <summary>
     ///     Interface that is used when updating displays based off the display mode.
     /// </summary>
-    public interface IDynamicDisplay
+    public interface IThemeableDisplay
     {
         /// <summary>
-        ///     Will update the UI to dark mode based off provided implementation
+        ///     Will update the UI to dark theme based off provided implementation
         /// </summary>
-        void RenderDarkMode();
+        void SetRenderDarkTheme();
         /// <summary>
-        ///     Will update the UI to light mode based off provided implementation
+        ///     Will update the UI to light theme based off provided implementation
         /// </summary>
-        void RenderLightMode();
+        void SetRenderLightTheme();
     }
 }

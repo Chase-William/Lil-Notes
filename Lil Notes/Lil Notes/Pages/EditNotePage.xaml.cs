@@ -37,7 +37,7 @@ namespace Lil_Notes
                 selectedNote.Content = ContentEntry.Text;
 
                 // pop page off nav stack
-                await Navigation.PopModalAsync();
+                await Navigation.PopAsync();
             }
             else
             {

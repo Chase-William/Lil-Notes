@@ -29,6 +29,8 @@ App.xbf
 Lil Notes.UWP.xr.xml
 MainPage.xbf
 Microsoft.UI.Xaml\DensityStyles\Compact.xbf
+finished_icon.png
 note_icon.png
+note_icon_2x.png
 Properties\Default.rd.xml
 WinMetadata\Windows.winmd

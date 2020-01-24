@@ -10,7 +10,8 @@
     <ContentPage.ToolbarItems>
 
         <!-- Item on bar for creating new notes -->
-        <ToolbarItem Icon="finished_icon.png"  
+        <ToolbarItem Text="Finsihed"
+                     Icon="finished_icon.png"  
                      Priority="0"  
                      Order="Primary"
                      Clicked="OnFinishedBtnClicked"/>
@@ -20,13 +21,16 @@
     <ContentPage.Content>
         <StackLayout Padding="10">
 
-            <Image Source="note_icon_2x.png" 
-                   Margin="10"/>
+            <!-- Uses a larger version of the icon -->
+            <Image Source="{Binding IconPath, StringFormat='{0}2x'}" 
+                   Margin="10"
+                   WidthRequest="140"/>
             
             <Label Text="Name:"/>
             <Entry x:Name="NameEntry" Text="{Binding Name}"/>
 
             <Label Text="Notes:"/>
+            
             <Entry x:Name="ContentEntry" Text="{Binding Content}"/>
 
         </StackLayout>
