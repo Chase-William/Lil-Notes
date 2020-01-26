@@ -14,7 +14,7 @@
             <Color x:Key="BlueColor">#1E90EE</Color>
             <Color x:Key="GrayColor">#2E3133</Color>
 
-                <!-- Navigation bar styles -->
+            <!-- Navigation bar styles -->
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="#1E90EE"/>
                 <Setter Property="BarTextColor" Value="White"/>

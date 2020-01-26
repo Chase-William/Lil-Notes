@@ -6,6 +6,30 @@
              mc:Ignorable ="d"
              x:Class      ="Lil_Notes.CreateNotePage">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <!-- Styles for stacklayout -->
+            <Style x:Key="LightStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="White"/>
+            </Style>
+            <Style x:Key="DarkStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="{StaticResource GrayColor}"/>
+            </Style>
+
+            <!-- Entry styles -->
+            <!--<Style x:Key="LightEntryStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="PlaceholderColor" Value="LightGray"/>
+            </Style>
+            <Style x:Key="DarkEntryStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="PlaceholderColor" Value="LightGray"/>
+            </Style>-->
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <!-- Toolbar for app -->
     <ContentPage.ToolbarItems>
 
@@ -18,20 +42,24 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout Padding="10">
+        <StackLayout Padding="10" Style="{DynamicResource StackLayoutStyle}">
 
-            <Image Source="{Binding IconPath, StringFormat='{0}2x'}" 
-                   Margin="10"
-                   WidthRequest="140"/>
+            <Image Source       ="{Binding IconPath,
+                   StringFormat ='{0}2x'}" 
+                   Margin       ="10"
+                   WidthRequest ="140"/>
 
-            <Entry x:Name      ="NameEntry" 
-                   Text        ="{Binding Name}" 
-                   Placeholder ="Note's Name"/>
-            
-            <Entry x:Name      ="ContentEntry"
-                   Text        ="{Binding Content}" 
-                   Placeholder ="Notes"/>
-            
+            <Frame BackgroundColor="White" CornerRadius="20" Padding="5">
+                <Entry x:Name       ="NameEntry" 
+                       Text         ="{Binding Name}" 
+                       Placeholder  ="Name"/>
+            </Frame>
+
+            <Frame BackgroundColor="White" CornerRadius="20" Padding="5" Margin="0,15,0,0">
+                <Entry x:Name       ="ContentEntry"
+                       Text         ="{Binding Content}" 
+                       Placeholder  ="Notes"/>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

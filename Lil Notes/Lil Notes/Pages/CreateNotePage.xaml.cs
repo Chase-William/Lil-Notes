@@ -13,15 +13,16 @@ namespace Lil_Notes
     ///     This page is used to create notes.
     /// </summary>
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CreateNotePage : ContentPage
+    public partial class CreateNotePage : ContentPage, IThemeableDisplay
     {
         private Note note;
 
         public CreateNotePage(Note _blankNote)
         {
             InitializeComponent();
+            Settings.CheckForThemeUpdates(this);
             note = _blankNote;
-        }       
+        }
 
         /// <summary>
         ///     Handler for the finished btn in toolbar being clicked.
@@ -48,6 +49,18 @@ namespace Lil_Notes
                 // Inform user of error
                 await DisplayAlert(NameErrorAlert.TITLE, NameErrorAlert.MSG, NameErrorAlert.CANCEL);
             }
+        }
+
+        public void SetRenderDarkTheme()
+        {
+            Resources["StackLayoutStyle"] = Resources["DarkStackLayoutStyle"];
+            //Resources["EntryStyle"] = Resources["DarkEntryStyle"];             
+        }
+
+        public void SetRenderLightTheme()
+        {
+            Resources["StackLayoutStyle"] = Resources["LightStackLayoutStyle"];
+            //Resources["EntryStyle"] = Resources["LightEntryStyle"];
         }
     }
 }

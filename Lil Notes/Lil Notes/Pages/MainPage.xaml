@@ -18,7 +18,6 @@
                 <Setter Property="SelectionMode" Value="Single"/>
             </Style>
             <Style x:Key="DarkNotesListViewStyle" TargetType="ListView">
-                <Setter Property="SeparatorColor" Value="DarkRed"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource GrayColor}"/>
                 <Setter Property="SelectionMode" Value="Single"/>
             </Style>
@@ -32,13 +31,43 @@
             </Style>
             
             <!-- Styles for searchbar -->
-            <Style x:Key="LightCustomSearchBarStyle" TargetType="local:CustomSearchBar">
-                <Setter Property="BackgroundColor" Value="Yellow"/>
+            <!--<Style x:Key="LightCustomSearchBarStyle" TargetType="local:CustomSearchBar">
+                <Setter Property="BackgroundColor" Value="White"/>
             </Style>
             <Style x:Key="DarkCustomSearchBarStyle" TargetType="local:CustomSearchBar">
-                <Setter Property="BackgroundColor" Value="Red"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource GrayColor}"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>-->
+
+            <!-- The styles for the main frame of the cellviews -->
+            <Style x:Key="LightMainFrameStyle" TargetType="Frame">
+                <Setter Property="BorderColor" Value="White"/>
+                <Setter Property="BackgroundColor" Value="White"/>
             </Style>
-            
+            <Style x:Key="DarkMainFrameStyle" TargetType="Frame">
+                <Setter Property="BorderColor" Value="{StaticResource GrayColor}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource GrayColor}"/>
+            </Style>
+
+            <!-- The styles for the interal frame of the cellviews -->                
+            <Style x:Key="LightInternalFrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="White"/>
+            </Style>
+            <Style x:Key="DarkInternalFrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource GrayColor}"/>
+            </Style>
+
+            <!-- The styles for all the labels inside the cellviews -->
+            <Style x:Key="LightLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+            <Style x:Key="DarkLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+
+            <local:CreationDateConverter x:Key="CreationDateConverter" />
+            <local:LastModifiedConverter x:Key="LastModifiedConverter" />
+
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -59,25 +88,63 @@
                      Clicked         ="OnSettingsBtnClicked"/>
 
     </ContentPage.ToolbarItems>
-    
+
     <StackLayout Style="{DynamicResource StackLayoutStyle}">
 
-        <local:CustomSearchBar Placeholder         ="Search"
-                               CancelButtonColor   ="{StaticResource BlueColor}"
-                               PlaceholderColor    ="{StaticResource GrayColor}"
-                               TextColor           ="{StaticResource BlueColor}"
-                               SearchButtonPressed ="OnSearchBarBtnPressed"                                 
-                               FontAttributes      ="Italic" 
-                               Style="{DynamicResource CustomSearchBarStyle}"/>
+        <Frame CornerRadius="20" Margin="5" Padding="2" BackgroundColor="White">
+            <local:CustomSearchBar Placeholder         ="Search"
+                                   CancelButtonColor   ="{StaticResource BlueColor}"
+                                   PlaceholderColor    ="LightGray"
+                                   TextColor           ="{StaticResource BlueColor}"     
+                                   TextChanged         ="CustomSearchBarTextChanged"
+                                   FontAttributes      ="Italic" />
+        </Frame>
+        
 
         <!-- List of notes -->
         <ListView x:Name        ="NotesListView" 
                   ItemsSource   ="{Binding Notes}" 
-                  Margin        ="5"
+                  Margin        ="5,0,5,0"
                   ItemSelected  ="OnListViewItemSelected" 
                   HasUnevenRows ="True"
-                  Style         ="{DynamicResource NotesListViewStyle}" />
+                  Style         ="{DynamicResource NotesListViewStyle}">
 
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame Padding      ="5" 
+                               Margin       ="0" 
+                               CornerRadius ="0" 
+                               Style        ="{DynamicResource MainFrameStyle}">
+                            
+                            <Frame BorderColor   ="{StaticResource BlueColor}" 
+                                   HasShadow     ="True" 
+                                   HeightRequest ="70" 
+                                   Padding       ="5"
+                                   Style="{DynamicResource InternalFrameStyle}">
+
+                                <StackLayout Orientation ="Horizontal">
+                                    <Image Margin ="2" 
+                                           Source ="{Binding IconPath}"/>
+                                    
+                                    <Label FontSize ="20" 
+                                           Text     ="{Binding Name}"
+                                           Style="{DynamicResource LabelStyle}"/>
+                                    
+                                    <StackLayout Orientation       ="Vertical" 
+                                                 HorizontalOptions ="EndAndExpand">
+                                        <Label Style="{DynamicResource LabelStyle}"
+                                               Text="{Binding CreationDate, Converter={StaticResource CreationDateConverter}}"/>
+                                        <Label Style="{DynamicResource LabelStyle}"
+                                               Text="{Binding LastModifiedDate, Converter={StaticResource LastModifiedConverter}}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
     </StackLayout>
-
 </ContentPage>

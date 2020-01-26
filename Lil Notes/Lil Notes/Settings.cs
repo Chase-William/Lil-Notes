@@ -15,8 +15,8 @@ namespace Lil_Notes
     /// </summary>
     public static class Settings
     {
-        private static DisplayTheme theme;
-
+        private static DisplayTheme theme = DisplayTheme.Light;
+        public static DisplayTheme Theme { get => theme; }
         /// <summary>
         ///     Will call the UpdateDisplayToTheme method within the caller which is REQUIRED to implement the IDynamicDisplayMode interface.
         ///     Reference : C# In Depth Fourth Edition by Jon Skeet, page number 33
@@ -51,6 +51,21 @@ namespace Lil_Notes
                     // Cancel was clicked
                     break;
             }
+        }
+
+        /// <summary>
+        ///     When rendering pages you want to check for the theme after you initialize your XAML file.
+        /// </summary>
+        public static void CheckForThemeUpdates<T>(T _page) where T : IThemeableDisplay
+        {
+            if (theme == DisplayTheme.Light)
+            {
+                _page.SetRenderLightTheme();
+            }
+            else
+            {
+                _page.SetRenderDarkTheme();
+            }                  
         }
     }
 }

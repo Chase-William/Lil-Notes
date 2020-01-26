@@ -39,7 +39,7 @@ namespace Lil_Notes
         {
             InitializeComponent();
             // Expressing to the ListView on what kind of cell type it will be using
-            NotesListView.ItemTemplate = new DataTemplate(typeof(NoteCell));
+            // NotesListView.ItemTemplate = new DataTemplate(typeof(NoteCell));
             // Attaching the source
             NotesListView.ItemsSource = Notes;          
         }
@@ -48,7 +48,7 @@ namespace Lil_Notes
         ///     Handler for the create new note button when clicked.
         ///     Launches a new page setup for note creation.
         /// </summary>
-        private void OnCreateNoteClicked(object sender, EventArgs e)
+        private async void OnCreateNoteClicked(object sender, EventArgs e)
         {
             // Disables the user from clicking several cells before the new page covers it the listview
             NotesListView.IsEnabled = false;
@@ -56,40 +56,34 @@ namespace Lil_Notes
             var blankNote = new Note("", "");
 
             // Must wrap CreateNotePage in NavigationPage so our toolbar will be visible
-            Navigation.PushAsync(new CreateNotePage(blankNote)
+            await Navigation.PushAsync(new CreateNotePage(blankNote)
             {
                 BindingContext = blankNote
             });
         }
-        
+
+         
         /// <summary>
         ///     Handler for the Listview items when selected.
         ///     Launches the edit note page.
         /// </summary>
-        private void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             // Disables the user from clicking several cells before the new page covers it the listview
             NotesListView.IsEnabled = false;
 
             // Select new
             selectedNote = (Note)e.SelectedItem;
-            selectedNote.SetColors(true);            
+            selectedNote.SetColors(true);
 
             // Creating the next page and passing in the data.
-            Navigation.PushAsync(new EditNotePage(selectedNote)
-            {
+            await Navigation.PushAsync(new EditNotePage(selectedNote)
+            {                
+                // So for some reason this uses the properties setters... -----------------------------------------------------------------------------------
                 BindingContext = selectedNote
             });
         }
-
-        /// <summary>
-        ///     Handles the searchbar's search btn being pressed.
-        /// </summary>
-        private void OnSearchBarBtnPressed(object sender, EventArgs e)
-        {
-
-        }
-
+        
         /// <summary>
         ///     Handles the setting btn being clicked.
         /// </summary>
@@ -98,7 +92,7 @@ namespace Lil_Notes
             // Will display the display setting options.
             Settings.ShowDisplaySettings(this);                             
         }
-
+        
         /// <summary>
         ///     Overriding to provide custom implementation to set cell colors and re-enable listview when returning from a different page.
         /// </summary>
@@ -109,6 +103,7 @@ namespace Lil_Notes
             if (selectedNote != null)
             {
                 selectedNote.SetColors(false);
+                selectedNote.IsBindingContextOccuring = false;
                 selectedNote = null;
             }
 
@@ -116,21 +111,41 @@ namespace Lil_Notes
             // This runs 1 time on launch when it's already true but not a huge deal
             NotesListView.IsEnabled = true;
 
-            base.OnAppearing();                        
+            base.OnAppearing();            
         }       
 
+        /// <summary>
+        ///     Sets the rendering properties of the various components of the page to render dark mode styles.
+        /// </summary>
         public void SetRenderDarkTheme()
         {
             Resources["NotesListViewStyle"] = Resources["DarkNotesListViewStyle"];
+            Resources["MainFrameStyle"] = Resources["DarkMainFrameStyle"];
+            Resources["InternalFrameStyle"] = Resources["DarkInternalFrameStyle"];
             Resources["StackLayoutStyle"] = Resources["DarkStackLayoutStyle"];
-            Resources["CustomSearchBarStyle"] = Resources["DarkCustomSearchBarStyle"];
+            Resources["LabelStyle"] = Resources["DarkLabelStyle"];
+            //Resources["CustomSearchBarStyle"] = Resources["DarkCustomSearchBarStyle"];
         }
 
+        /// <summary>
+        ///     Sets the rendering properties of the various components of the page to render light mode styles.
+        /// </summary>
         public void SetRenderLightTheme()
         {
             Resources["NotesListViewStyle"] = Resources["LightNotesListViewStyle"];
+            Resources["MainFrameStyle"] = Resources["LightMainFrameStyle"];
+            Resources["InternalFrameStyle"] = Resources["LightInternalFrameStyle"];
             Resources["StackLayoutStyle"] = Resources["LightStackLayoutStyle"];
-            Resources["CustomSearchBarStyle"] = Resources["LightCustomSearchBarStyle"];
-        }        
+            Resources["LabelStyle"] = Resources["LightLabelStyle"];
+            //Resources["CustomSearchBarStyle"] = Resources["LightCustomSearchBarStyle"];
+        }
+
+        /// <summary>
+        ///     Handles the text being changed within our custom search bar AND initiates querying.
+        /// </summary>
+        private void CustomSearchBarTextChanged(object sender, TextChangedEventArgs e)
+        {
+            NotesListView.ItemsSource = Data.DataProvider.QueryNotesByString(e.NewTextValue);
+        }
     }
 }

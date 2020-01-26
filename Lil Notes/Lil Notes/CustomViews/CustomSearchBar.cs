@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Lil_Notes.CustomViews
 {
-    public class CustomSearchBar : SearchBar
-    {
-    }
+    /// <summary>
+    ///     Is needed as the export target for our custom Android searchview renderer.
+    /// </summary>
+    public class CustomSearchBar : SearchBar { }
 }

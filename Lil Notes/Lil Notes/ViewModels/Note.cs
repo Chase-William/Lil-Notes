@@ -17,23 +17,57 @@ namespace Lil_Notes
 
         private string name;
 		private string iconPath;
-		public string Content { get; set; }
-		public DateTime CreationDate { get; set; }
-		public DateTime LastModifiedDate { get; set; }
-	
+		private string content;
+		private DateTime lastModifiedDate;
+		
+		public DateTime CreationDate { get; set; }		
+		public bool IsBindingContextOccuring { get; set; }
 
 		// Event for binding engine updates
 		public event PropertyChangedEventHandler PropertyChanged;
 		// Stores background color states of notes
 		private Color backgroundColor;
+		private Color borderColor;
+
 
 		/// <summary>
-		///		Property for note name that has support for updating NoteCells name when changed.
+		///		Property for changing the content of a note. Will update last modified.
 		/// </summary>
-		public string Name { get => name;
+		public string Content
+		{
+			get => content;
+			set
+			{
+				content = value;
+				LastModifiedDate = DateTime.Now;
+			}
+		}
+
+		/// <summary>
+		///		Property for setting the last modified field. Has a binding up update UI when changed.
+		/// </summary>
+		public DateTime LastModifiedDate
+		{
+			get => lastModifiedDate;
+			set
+			{
+				if (IsBindingContextOccuring)
+				{
+					lastModifiedDate = DateTime.Now;
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(NoteCell.BIND_LAST_MODIFIED));
+				}
+			}
+		}
+
+		/// <summary>
+		///		Property for note name that has support for updating NoteCells name when changed. Will update last modified.
+		/// </summary>
+		public string Name { 
+			get => name;
 			set 
 			{				
 				name = value;
+				LastModifiedDate = DateTime.Now;
 				// Will trigger binding engine with this event
 				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(NoteCell.BIND_NOTE_NAME));
 			}
@@ -54,6 +88,22 @@ namespace Lil_Notes
 			}
 		}
 
+		/// <summary>
+		///		Property for the border color of the main frame for the note within the listview.
+		/// </summary>
+		public Color BorderColor
+		{
+			get => borderColor;
+			set 
+			{ 
+				borderColor = value;
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(NoteCell.BIND_BORDER_COLOR));
+			}
+		}
+
+		/// <summary>
+		///		Property for the icon path of the notes.
+		/// </summary>
 		public string IconPath
 		{
 			get => iconPath;
@@ -76,8 +126,8 @@ namespace Lil_Notes
 		/// </summary>
 		public Note(string _name, string _content)
 		{
-			Name = _name;
-			Content = _content;
+			name = _name;
+			content = _content;
 			CreationDate = DateTime.Now;
 
 			// Choosing random icon
@@ -98,7 +148,15 @@ namespace Lil_Notes
 			// Unselected
 			else
 			{
-				BackgroundColor = Color.White;
+				if (Settings.Theme == DisplayTheme.Light)
+				{
+					BackgroundColor = Color.LightGray;
+				}
+				else
+				{
+					BackgroundColor = Color.FromHex("#2E3133");
+					BorderColor = Color.FromHex("#2E3133");
+				}
 			}
 		}
 	}

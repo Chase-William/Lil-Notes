@@ -4,18 +4,22 @@ using Lil_Notes.CustomViews;
 using Color = Android.Graphics.Color;
 using Android.Content;
 using Android.Widget;
+using Android.Runtime;
+using Android.Views;
+using Xamarin.Forms.Xaml;
 
 // Marking this render to be exported
 [assembly: ExportRenderer(typeof(CustomSearchBar), typeof(Lil_Notes.Droid.CustomRenderers.CustomSearchBarRenderer))]
 
 namespace Lil_Notes.Droid.CustomRenderers
-{    
+{
     /// <summary>
     ///     Customer render for Searchbars. 
     ///         Objectives:
     ///             - Change color of underline on searchbar 
     ///             - Change color of searchbar search icon
     /// </summary>
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public class CustomSearchBarRenderer : SearchBarRenderer
     {
         public CustomSearchBarRenderer(Context _context) : base(_context) { }
@@ -36,34 +40,17 @@ namespace Lil_Notes.Droid.CustomRenderers
 
             if (e.NewElement != null)
             {
-                //this.SetBackgroundColor(Color.Transparent);
+                this.SetBackgroundColor(Color.Transparent);
 
-                //LinearLayout linearLayout = this.Control.GetChildAt(0) as LinearLayout;
-                //linearLayout = linearLayout.GetChildAt(2) as LinearLayout;
-                //linearLayout = linearLayout.GetChildAt(1) as LinearLayout;
-
-                // Changes the background layout that is responceable for the underline
-                //linearLayout.SetBackgroundColor(Color.Violet);
+                // The ridiculous way to remove the lay responceable for the underline when searching
+                var linearLayout = (LinearLayout)Control.GetChildAt(0);
+                linearLayout = (LinearLayout)linearLayout.GetChildAt(2);
+                linearLayout = (LinearLayout)linearLayout.GetChildAt(1);
+                linearLayout.Background = null;
             }          
             
-            base.OnElementChanged(e);
-        }
-
-
-        /// <summary>
-        ///     Sets UI properties to render in a dark theme manner provided by the implementation.
-        /// </summary>
-        public void SetRenderDarkTheme()
-        {
-            this.SetBackgroundColor(Color.White);
-        }
-
-        /// <summary>
-        ///     Sets UI properties to render in a light theme manner provided by the implementation.
-        /// </summary>
-        public void SetRenderLightTheme()
-        {
             
+            base.OnElementChanged(e);
         }
     }
 }
