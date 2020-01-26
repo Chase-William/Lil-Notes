@@ -20,13 +20,13 @@ namespace Lil_Notes {
         private global::Xamarin.Forms.Entry NameEntry;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
-        private global::Xamarin.Forms.Entry ContentEntry;
+        private global::Lil_Notes.SharedCustomRenderers.CustomEditor ContentEntry;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(CreateNotePage));
             NameEntry = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Entry>(this, "NameEntry");
-            ContentEntry = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Entry>(this, "ContentEntry");
+            ContentEntry = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Lil_Notes.SharedCustomRenderers.CustomEditor>(this, "ContentEntry");
         }
     }
 }

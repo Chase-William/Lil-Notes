@@ -92,20 +92,21 @@
     <StackLayout Style="{DynamicResource StackLayoutStyle}">
 
         <Frame CornerRadius="20" Margin="5" Padding="2" BackgroundColor="White">
-            <local:CustomSearchBar Placeholder         ="Search"
+            <local:CustomSearchBar x:Name="CustomSearchBar"
+                                   Placeholder         ="Search"
                                    CancelButtonColor   ="{StaticResource BlueColor}"
                                    PlaceholderColor    ="LightGray"
                                    TextColor           ="{StaticResource BlueColor}"     
-                                   TextChanged         ="CustomSearchBarTextChanged"
+                                   TextChanged         ="CustomSearchBarTextChanged"                                   
                                    FontAttributes      ="Italic" />
         </Frame>
-        
+
 
         <!-- List of notes -->
         <ListView x:Name        ="NotesListView" 
                   ItemsSource   ="{Binding Notes}" 
                   Margin        ="5,0,5,0"
-                  ItemSelected  ="OnListViewItemSelected" 
+                  ItemTapped    ="NotesItemTapped"
                   HasUnevenRows ="True"
                   Style         ="{DynamicResource NotesListViewStyle}">
 

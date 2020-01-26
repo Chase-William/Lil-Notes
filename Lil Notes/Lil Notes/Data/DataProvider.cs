@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Lil_Notes.Data
@@ -11,9 +12,9 @@ namespace Lil_Notes.Data
         /// <summary>
         ///     Queryies notes by their name using a string.
         /// </summary>
-        public static List<Note> QueryNotesByString(string _name)
+        public static ObservableCollection<Note> QueryNotesByString(string _name)
         {
-            return DataNotes.Notes.Where(note => note.Name.ToLower().Contains(_name.ToLower())).ToList();
+            return new ObservableCollection<Note>(DataNotes.Notes.Where(note => note.Name.ToLower().Contains(_name.ToLower())).ToList());
         }
     }
 }

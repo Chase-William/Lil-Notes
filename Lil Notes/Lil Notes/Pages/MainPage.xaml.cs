@@ -29,6 +29,11 @@ namespace Lil_Notes
             set { DataNotes.Notes = value; }
         }
 
+        public static MainPage Mainpage { get; private set; }
+        public CustomSearchBar MainSearchBar { get; set; }
+
+        private string queryString;
+
         // Tracks note selected
         private Note selectedNote;
 
@@ -41,8 +46,11 @@ namespace Lil_Notes
             // Expressing to the ListView on what kind of cell type it will be using
             // NotesListView.ItemTemplate = new DataTemplate(typeof(NoteCell));
             // Attaching the source
-            NotesListView.ItemsSource = Notes;          
+            Mainpage = this;
+            MainSearchBar = CustomSearchBar;                
         }
+
+
 
         /// <summary>
         ///     Handler for the create new note button when clicked.
@@ -62,28 +70,24 @@ namespace Lil_Notes
             });
         }
 
-         
-        /// <summary>
-        ///     Handler for the Listview items when selected.
-        ///     Launches the edit note page.
-        /// </summary>
-        private async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void NotesItemTapped(object sender, ItemTappedEventArgs e)
         {
+            if (e.Item == null) return;
             // Disables the user from clicking several cells before the new page covers it the listview
             NotesListView.IsEnabled = false;
 
             // Select new
-            selectedNote = (Note)e.SelectedItem;
+            selectedNote = (Note)e.Item;
             selectedNote.SetColors(true);
 
             // Creating the next page and passing in the data.
             await Navigation.PushAsync(new EditNotePage(selectedNote)
-            {                
+            {
                 // So for some reason this uses the properties setters... -----------------------------------------------------------------------------------
                 BindingContext = selectedNote
             });
         }
-        
+
         /// <summary>
         ///     Handles the setting btn being clicked.
         /// </summary>
@@ -107,12 +111,18 @@ namespace Lil_Notes
                 selectedNote = null;
             }
 
+            InvalidateList();
+            if (!string.IsNullOrWhiteSpace(MainSearchBar.Text))
+            {
+                CustomSearchBarTextChanged(null, new TextChangedEventArgs(null, queryString));
+            }
+
             // Whenever we return the list should be active
             // This runs 1 time on launch when it's already true but not a huge deal
             NotesListView.IsEnabled = true;
 
             base.OnAppearing();            
-        }       
+        }
 
         /// <summary>
         ///     Sets the rendering properties of the various components of the page to render dark mode styles.
@@ -145,7 +155,23 @@ namespace Lil_Notes
         /// </summary>
         private void CustomSearchBarTextChanged(object sender, TextChangedEventArgs e)
         {
-            NotesListView.ItemsSource = Data.DataProvider.QueryNotesByString(e.NewTextValue);
+            if (e.NewTextValue != null && !e.NewTextValue.All(x => x == ' '))
+            {
+                queryString = e.NewTextValue;
+                NotesListView.ItemsSource = Data.DataProvider.QueryNotesByString(queryString);
+            }
+            if (e.NewTextValue == "")
+            {
+                InvalidateList();
+            }            
+        }
+
+        /// <summary>
+        ///     Invalidates the list so an update is forced.
+        /// </summary>
+        public void InvalidateList()
+        {
+            NotesListView.ItemsSource = Notes;
         }
     }
 }

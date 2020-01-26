@@ -7,6 +7,7 @@ using Android.Widget;
 using Android.Runtime;
 using Android.Views;
 using Xamarin.Forms.Xaml;
+using System;
 
 // Marking this render to be exported
 [assembly: ExportRenderer(typeof(CustomSearchBar), typeof(Lil_Notes.Droid.CustomRenderers.CustomSearchBarRenderer))]
@@ -23,6 +24,8 @@ namespace Lil_Notes.Droid.CustomRenderers
     public class CustomSearchBarRenderer : SearchBarRenderer
     {
         public CustomSearchBarRenderer(Context _context) : base(_context) { }
+
+        MainPage MainPage => MainPage.Mainpage;
 
         protected override void OnElementChanged(ElementChangedEventArgs<SearchBar> e)
         {
@@ -42,15 +45,24 @@ namespace Lil_Notes.Droid.CustomRenderers
             {
                 this.SetBackgroundColor(Color.Transparent);
 
-                // The ridiculous way to remove the lay responceable for the underline when searching
+                // The ridiculous way to remove the layout responceable for the underline when searching
                 var linearLayout = (LinearLayout)Control.GetChildAt(0);
                 linearLayout = (LinearLayout)linearLayout.GetChildAt(2);
                 linearLayout = (LinearLayout)linearLayout.GetChildAt(1);
                 linearLayout.Background = null;
-            }          
-            
-            
+
+                // Getting a reference to the clear button inside the searchview
+                int searchCloseButtonId = this.Context.Resources.GetIdentifier("android:id/search_close_btn", null, null);
+                var clearBtn = FindViewById<ImageView>(searchCloseButtonId);
+
+                clearBtn.Click += delegate
+                {
+                    MainPage.MainSearchBar.Text = "";
+                    MainPage.InvalidateList();
+                };
+            }                        
+           
             base.OnElementChanged(e);
-        }
+        }        
     }
 }
